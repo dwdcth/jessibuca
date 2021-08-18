@@ -33,14 +33,14 @@ jobs:
         with:
           # Version Spec of the version to use.  Examples: 12.x, 10.15.1, >=10.15.0
           node-version: 14.x
+
       - name: Cache node modules
         uses: actions/cache@v2
         env:
           cache-name: cache-node-modules
         with:
           path: node_modules
-          key: ${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys:  ${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ env.cache-name }}-${{ hashFiles('**/package.json') }}
 
       - name: npm install
         run: npm install
