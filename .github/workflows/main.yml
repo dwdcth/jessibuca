@@ -38,13 +38,9 @@ jobs:
         env:
           cache-name: cache-node-modules
         with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
           path: node_modules
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+          key: ${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys:  ${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
 
       - name: npm install
         run: npm install
@@ -60,4 +56,3 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: "demo.zip"
-          # token: ${{ secrets.GH_TOKEN }}
